@@ -11,9 +11,9 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 DHT dht(DHTPIN, DHTTYPE);
 
 Adafruit_BMP085 bmp;
-int upButton = 10;
-int downButton = 11;
-int selectButton = 12;
+int yukari = 10;
+int asagi = 11;
+int secim = 12;
 int menu = 1;
 
 void setup() {
@@ -25,32 +25,32 @@ void setup() {
   pinMode(downButton, INPUT_PULLUP);
   pinMode(selectButton, INPUT_PULLUP);
   
-  updateMenu();
+  butonlar();
 }
 
 void loop() {
   
-  if (!digitalRead(downButton)){
+  if (!digitalRead(asagi)){
     menu++;
-    updateMenu();
+    butonlar();
     delay(100);
-    while (!digitalRead(downButton));
+    while (!digitalRead(asagi));
   }
-  if (!digitalRead(upButton)){
+  if (!digitalRead(yukari)){
     menu--;
-    updateMenu();
+    butonlar();
     delay(100);
-    while(!digitalRead(upButton));
+    while(!digitalRead(yukari));
   }
-  if (!digitalRead(selectButton)){
-    executeAction();
-    updateMenu();
+  if (!digitalRead(secim)){
+    secimekran();
+    butonlar();
     delay(100);
-    while (!digitalRead(selectButton));
+    while (!digitalRead(secim));
   }
 }
 
-void updateMenu() {
+void butonlar() {
   switch (menu) {
     case 0:
       menu = 1;
@@ -94,7 +94,7 @@ void updateMenu() {
   }
 }
 
-void executeAction() {
+void secimekran() {
   switch (menu) {
     case 1:
       action1();
@@ -111,7 +111,7 @@ void executeAction() {
   }
 }
 
-void action1() {
+void aksiyon1() {
   lcd.clear();
   lcd.home();
   lcd.print("bugunku sicaklik");
@@ -119,7 +119,7 @@ void action1() {
   lcd.print(dht.readTemperature());
   delay(2000);
 }
-void action2() {
+void aksiyon2() {
   lcd.clear();
   lcd.home();
   lcd.print("bugunku nem");
@@ -127,7 +127,7 @@ void action2() {
   lcd.print(dht.readHumidity());
   delay(2000);
 }
-void action3() {
+void aksiyon3() {
   lcd.clear();
   lcd.home();
   lcd.print("bugunku basinc");
@@ -135,7 +135,7 @@ void action3() {
   lcd.print(bmp.readPressure());
   delay(1500);
 }
-void action4() {
+void aksiyon4() {
   lcd.clear();
   lcd.home();
   lcd.print("bugunku rakim");
