@@ -1,4 +1,4 @@
-#include <Adafruit_BMP085.h>
+#include <Adafruit_BMP085.h>//kutuphaneleri ekledim bmp,dht,lcd,sda,scl 
 
 #include <DHT.h>
 
@@ -11,13 +11,13 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 DHT dht(DHTPIN, DHTTYPE);
 
 Adafruit_BMP085 bmp;
-int yukari = 10;
+int yukari = 10;//sensorler ve butonlar için degisken tanımladım
 int asagi = 11;
 int secim = 12;
 int menu = 1;
 
 void setup() {
-  dht.begin();
+  dht.begin();//burada sensorler ve lcd ekranı cagırdım 
   bmp.begin();
   lcd.init();
   lcd.backlight();
@@ -28,7 +28,7 @@ void setup() {
   butonlar();
 }
 
-void loop() {
+void loop() { //butonlar ıcın kontroller metod ile
   
   if (!digitalRead(asagi)){
     menu++;
@@ -116,7 +116,7 @@ void aksiyon1() {
   lcd.home();
   lcd.print("bugunku sicaklik");
   lcd.setCursor(7,1);
-  lcd.print(dht.readTemperature());
+  lcd.print(dht.readTemperature());//sıcaklık komutu
   delay(2000);
 }
 void aksiyon2() {
@@ -124,7 +124,7 @@ void aksiyon2() {
   lcd.home();
   lcd.print("bugunku nem");
   lcd.setCursor(5,1);
-  lcd.print(dht.readHumidity());
+  lcd.print(dht.readHumidity());//nem komutu
   delay(2000);
 }
 void aksiyon3() {
@@ -132,7 +132,7 @@ void aksiyon3() {
   lcd.home();
   lcd.print("bugunku basinc");
   lcd.setCursor(5,1);
-  lcd.print(bmp.readPressure());
+  lcd.print(bmp.readPressure());//basınc komutu
   delay(1500);
 }
 void aksiyon4() {
@@ -140,6 +140,6 @@ void aksiyon4() {
   lcd.home();
   lcd.print("bugunku rakim");
   lcd.setCursor(5,1);
-  lcd.print(bmp.readAltitude());
+  lcd.print(bmp.readAltitude());//rakim komutu
   delay(1500);
 }
